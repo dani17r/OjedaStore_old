@@ -1,0 +1,54 @@
+// app global css in SCSS form
+
+.mode--light {
+	background-color: #f4f4f4;
+	.guest {
+
+	}
+	.user {
+
+	}
+
+	.admin {
+
+	}
+
+	.h1-layout {
+		display: block;
+		width: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 10000;
+		font-size: 30px;
+		text-align: center;
+	}
+}
+
+.mode--dark {
+	background-color: #3b3b3b;
+	.q-menu {
+		background-color: #4f4f4f;
+		color: #fff;
+		.q-item__label{
+			color: #fff;
+		}
+	}
+	.guest {
+
+	}
+	.user {
+
+	}
+
+	.admin {
+
+	}
+}
+
+.bg-dark {
+    background-color: #3b3b3b;
+}
+.bg-light {
+    background-color: #ffffff;
+}

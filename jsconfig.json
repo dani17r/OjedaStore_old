@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "src/*": [ "src/*" ],
+      "app/*": [ "*" ],
+      "components/*": [ "src/template/components/*" ],
+      "layouts/*": [ "src/template/layouts/*" ],
+      "pages/*": [ "src/template/pages/*" ],
+      "assets/*": [ "src/assets/*" ],
+      "boot/*": [ "src/boot/*" ],
+      "vue$": [ "node_modules/vue/dist/vue.runtime.esm-bundler.js" ]
+    },
+    "excludes": [
+      "dist",
+      ".quasar",
+      "node_modules"
+    ]
+  }
+}
