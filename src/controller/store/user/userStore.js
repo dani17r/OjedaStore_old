@@ -1,5 +1,6 @@
 import { api } from '@boot/axios.js'
 import { defineStore } from 'pinia'
+import axios from 'axios'
 
 export const useUserStore = defineStore({
 	id: 'userStore',
@@ -13,22 +14,20 @@ export const useUserStore = defineStore({
 	},
 	actions: {
 
-		async getUserFetch(){
+		async getUser(){
 
 			if (this.init <= 1) {
-				const response = (await api.get('profile')).data
+				const response = (await api.get('user/profile')).data
 				if (!response?.error) {
 					this.user = response.user
 					this.user.image = 'images/users/profiles/1.jpg'
 					this.user.birthDate = '2019/02/01'
-					this.user.locations = [{
-						address: 'Barrio obrero, los peruanos, casa #135',
-						reference: 'casa color amarilla, diagonal a la bodega de repuestos ´a que luis´'
-					}]
 				}
 			}
 			this.init++
 		},
-
+		async updateUser(update){
+			/*const response = */await (api.post('user/profile/update', update)).data
+		},
 	}
 })

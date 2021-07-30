@@ -1,30 +1,46 @@
 <script>
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, computed, watch } from 'vue'
 import { useCentralStore } from '@store/centralStore.js'
+import { useUserStore } from "@store/user/userStore.js";
+
 import { clone } from 'lodash'
 
 export default {
 	name: 'page-profile-user',
 	props: {
 		modelValue: {
-			type: String,
+			type: [String, Number],
 			default: '',
+		},
+		value: {
+			type: [String, Number],
+			default: '',
+		},
+		delete:{
+			type: Boolean,
+			default: false,
 		},
 		namekey: {
-			type: String,
-			default: '',
+			type: [String, Array],
 		},
 		mutation: {
-			type: Object,
-			default: {},
+			type: [Object, Array],
 		},
 		edition: {
 			type: Boolean,
 			default: false,
+		},
+		deepField: {
+			type: String,
+			default: null,
+		},
+		updateField: {
+			type: [Object, Array],
 		}
 	},
-	setup(props) {
-		const centralStore = useCentralStore()
+	setup(props, { emit }) {
+		const centralStore = useCentralStore();
+		const userStore = useUserStore();
 
 		const isDark = computed(() => centralStore.isDark$('guest'))
 		const activeInput = ref(false)
@@ -34,7 +50,7 @@ export default {
 		const dRef = ref(null)
 
 		const modelValue = computed({
-			get: () => props.modelValue,
+			get: () => props.modelValue || props.value,
 			set: val => modelValueMemory.value = val
 		})
 
@@ -50,19 +66,65 @@ export default {
 			return ['input-modify', { 'change': activeInput.value }]
 		})
 
+		const updateData = () => {
+			if (_.isArray(props.namekey)) {
+				props.mutation[props.namekey[0]][props.namekey[1]] = modelValueMemory.value
+			}
+			else {
+				props.mutation[props.namekey] = modelValueMemory.value
+			}
+
+			if (!_.isEmpty(props.deepField)) {
+				userStore.updateUser({
+					[props.deepField]: props.updateField
+				})
+			} else {
+				if (_.isArray(props.namekey)) {
+					userStore.updateUser({
+						[props.namekey[0]]: modelValueMemory.value
+					})
+				}
+				else {
+					userStore.updateUser({
+						[props.namekey]: modelValueMemory.value
+					})
+				}
+			}
+		}
+
 		const activeEdit = () => {
+
 			if (!focusInput.value) {
 				setTimeout(() => dRef.value.focus(), 250)
 				activeInput.value = !activeInput.value
 			} else activeInput.value = false
 
 			if (!activeInput.value) {
-				const compared = props.mutation[props.namekey] != modelValueMemory.value
+				let compared = null
+
+				if (_.isArray(props.namekey)) {
+					compared = props.mutation[props.namekey[0]][props.namekey[1]] != modelValueMemory.value
+				}
+				else {
+					compared = props.mutation[props.namekey]  != modelValueMemory.value
+				}
+
 				const isNotEmpy = modelValueMemory.value != null || '' || undefined
+
 				if (compared && isNotEmpy) {
-					props.mutation[props.namekey] = modelValueMemory.value
+					updateData()
 				}
 			}
+		}
+
+		watch(() => props.delete, (value) => {
+			if (value) setTimeout(()=> delteData(), 300)
+		})
+
+		const delteData = () => {
+			// userStore.updateUser({
+			// 	[props.deepField]: props.updateField
+			// })
 		}
 
 		const press = (e) => {

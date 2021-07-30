@@ -7,7 +7,7 @@ export default {
   setup() {
     /** get user - data----*** **/
     const userStore = useUserStore();
-    userStore.getUserFetch();
+    userStore.getUser();
     const user = computed(() => userStore.user);
 
     return {

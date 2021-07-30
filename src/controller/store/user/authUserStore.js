@@ -1,9 +1,9 @@
+import { addCredentials, deleteCredentials } from '@http/authUserService.js'
 import { getResponseInHtml, activeError } from '@tools/utils.js'
 import { uid, SessionStorage } from 'quasar'
 import { api } from '@boot/axios.js'
 import { defineStore } from 'pinia'
 import { clone } from 'lodash'
-import { addCredentials, deleteCredentials } from '@http/authUserService.js'
 
 export const useAuthUserStore = defineStore({
 	id: 'authUserStore',
@@ -164,6 +164,33 @@ export const useAuthUserStore = defineStore({
 				})
 			} finally {
 				$q.loading.hide()
+			}
+		},
+
+		async getUserPassword(password){
+			const response = (await api.post('user/profile/password', { password })).data
+			return response.status
+		},
+
+		async changeUserPassword(password, $q){
+			const response = (await api.post('user/profile/password/update', { password })).data
+			const msg = getResponseInHtml(response)
+
+			if(!response?.error) {
+				$q.notify({
+					type: 'positive',
+					message: msg,
+					html: true,
+				})
+				return true
+			}
+			else{
+				$q.notify({
+					type: 'negative',
+					message: msg,
+					html: true,
+				})
+				return false
 			}
 		},
 
