@@ -3,61 +3,50 @@ import { ref, reactive, computed, watch } from 'vue'
 import { useCentralStore } from '@store/centralStore.js'
 import { useUserStore } from "@store/user/userStore.js";
 
-import { clone } from 'lodash'
-
 export default {
 	name: 'page-profile-user',
 	props: {
 		modelValue: {
 			type: [String, Number],
-			default: '',
+			default: null,
 		},
 		value: {
 			type: [String, Number],
-			default: '',
-		},
-		delete:{
-			type: Boolean,
-			default: false,
-		},
-		namekey: {
-			type: [String, Array],
-		},
-		mutation: {
-			type: [Object, Array],
-		},
-		edition: {
-			type: Boolean,
-			default: false,
-		},
-		deepField: {
-			type: String,
 			default: null,
 		},
-		updateField: {
-			type: [Object, Array],
-		}
+		edit: {
+			type: Boolean,
+			default: false,
+		},
+		isDark: {
+			type: Boolean,
+			default: false,
+		},
+		name: {
+			type: String,
+			default: '',
+		},
+		index: {
+			type: [String, Number],
+		},
 	},
 	setup(props, { emit }) {
-		const centralStore = useCentralStore();
-		const userStore = useUserStore();
 
-		const isDark = computed(() => centralStore.isDark$('guest'))
 		const activeInput = ref(false)
 		const focusInput = ref(false)
 
-		const modelValueMemory = ref(null)
+		const memory = ref(null)
 		const dRef = ref(null)
 
-		const modelValue = computed({
+		const modelvalue = computed({
 			get: () => props.modelValue || props.value,
-			set: val => modelValueMemory.value = val
+			set: val => memory.value = val
 		})
 
 		const blurEvent = () => {
 			activeInput.value = false
 			setTimeout(() => {
-				modelValue.value = props.modelValue
+				modelvalue.value = props.modelValue
 				focusInput.value = false
 			}, 250)
 		}
@@ -65,32 +54,6 @@ export default {
 		const classProperty = computed(() => {
 			return ['input-modify', { 'change': activeInput.value }]
 		})
-
-		const updateData = () => {
-			if (_.isArray(props.namekey)) {
-				props.mutation[props.namekey[0]][props.namekey[1]] = modelValueMemory.value
-			}
-			else {
-				props.mutation[props.namekey] = modelValueMemory.value
-			}
-
-			if (!_.isEmpty(props.deepField)) {
-				userStore.updateUser({
-					[props.deepField]: props.updateField
-				})
-			} else {
-				if (_.isArray(props.namekey)) {
-					userStore.updateUser({
-						[props.namekey[0]]: modelValueMemory.value
-					})
-				}
-				else {
-					userStore.updateUser({
-						[props.namekey]: modelValueMemory.value
-					})
-				}
-			}
-		}
 
 		const activeEdit = () => {
 
@@ -100,53 +63,32 @@ export default {
 			} else activeInput.value = false
 
 			if (!activeInput.value) {
-				let compared = null
-
-				if (_.isArray(props.namekey)) {
-					compared = props.mutation[props.namekey[0]][props.namekey[1]] != modelValueMemory.value
-				}
-				else {
-					compared = props.mutation[props.namekey]  != modelValueMemory.value
-				}
-
-				const isNotEmpy = modelValueMemory.value != null || '' || undefined
-
+				const compared = modelvalue.value != memory.value
+				const isNotEmpy = memory.value != null || '' || undefined
 				if (compared && isNotEmpy) {
-					updateData()
+					emit('update', {
+						field: props.name,
+						value: memory.value,
+						key: props.index || `1-${props.name}`,
+					})
 				}
 			}
-		}
-
-		watch(() => props.delete, (value) => {
-			if (value) setTimeout(()=> delteData(), 300)
-		})
-
-		const delteData = () => {
-			// userStore.updateUser({
-			// 	[props.deepField]: props.updateField
-			// })
 		}
 
 		const press = (e) => {
-			if (e.code == 'Enter') {
-				activeEdit()
-			} else if (e.code == 'Escape') {
-				blurEvent()
-			}
+			if (e.code == 'Enter') activeEdit()
+			else if (e.code == 'Escape') blurEvent()
 		}
 
-		if (props.edition) {
-			activeEdit()
-		}
+		if (props.edit) activeEdit()
 
 		return {
 			classProperty,
 			activeInput,
 			focusInput,
 			activeEdit,
-			modelValue,
+			modelvalue,
 			blurEvent,
-			isDark,
 			press,
 			dRef,
 		}
@@ -155,7 +97,7 @@ export default {
 </script>
 
 <template>
-<q-input :borderless="!activeInput" :dark="isDark" :class="classProperty" :ref="(el)=> dRef=el" @blur="blurEvent" @focus="focusInput=true" :disable="!activeInput" v-model="modelValue" @keydown="press">
+<q-input :borderless="!activeInput" :dark="isDark" :class="classProperty" :ref="(el)=> dRef=el" @blur="blurEvent" @focus="focusInput=true" :disable="!activeInput" v-model="modelvalue" @keydown="press">
 	<template v-slot:after>
 		<q-btn @click="activeEdit" :icon="activeInput ? 'save': 'edit'" :dark="isDark" size="11px" flat round />
 	</template>
