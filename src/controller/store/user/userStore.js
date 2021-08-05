@@ -21,7 +21,6 @@ export const useUserStore = defineStore({
 				if (!response?.error) {
 					this.user = response.user
 					this.user.image = 'images/users/profiles/1.jpg'
-					this.user.birthDate = '2019/02/01'
 				}
 			}
 			this.init++

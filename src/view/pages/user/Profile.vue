@@ -33,8 +33,9 @@ export default {
 		/** dialog --------------- **/
 		const dialogPassword = ref(false)
 
-		/** form --------------- **/
+		/** form user--------------- **/
 		const updateUser = ({ field, value }) => {
+			console.log('funciona', field, value);
 			userStore.$patch(store => {
 				store.user[field] = value
 				userStore.updateUser({ [field]: value })
@@ -119,16 +120,15 @@ export default {
 
 		return {
 			dialogPassword,
-			editAddress,
+			updateUser,
 			isDark,
 			user,
-
-			updateUser,
 
 			updateLocation,
 			deleteLocation,
 			blurLocation,
 			addLocation,
+			editAddress,
 
 			deletePhone,
 			updatePhone,
@@ -164,7 +164,7 @@ export default {
 				</strong>
 				<div class="flex q-mt-lg">
 
-					<DImgProfile :src="user.image" />
+					<DImgProfile :src="user.image"  :isDark="isDark"/>
 
 					<div class="col q-px-md">
 
@@ -174,7 +174,7 @@ export default {
 
 						<DInputEdit v-model="user.username" name="username" placeholder="User name" label="Nombre de usuario" @update="updateUser" :isDark="isDark"/>
 
-						<!-- <DInputDate v-model="user.birthDate" name="birthDate" placeholder="Fecha de nacimiento" label="Fecha de nacimiento" @update="updateUser" :isDark="isDark"/> -->
+						<DInputDate v-model="user.birthDate" name="birthDate" placeholder="Fecha de nacimiento" label="Fecha de nacimiento" @update="updateUser" :isDark="isDark"/>
 
 					</div>
 				</div>

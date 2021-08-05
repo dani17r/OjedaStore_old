@@ -11,19 +11,16 @@ export default {
 			type: String,
 			default: '1980/01/01',
 		},
-		namekey: {
+		name: {
 			type: String,
 			default: '',
 		},
-		mutation: {
-			type: Object,
-			default: {},
-		}
+		isDark:{
+			type: Boolean,
+			default: false,
+		},
 	},
-	setup(props) {
-
-		const centralStore = useCentralStore()
-		const isDark = computed(() => centralStore.isDark$('guest'))
+	setup(props, { emit }) {
 
 		const modelValueCopy = computed(()=> props.modelValue)
 		const modelValueMut = ref(props.modelValue)
@@ -74,8 +71,11 @@ export default {
 		}
 		const saveBirthDate = () => {
 			blur.value = false
-			if (props.mutation[props.namekey] != modelValue.value) {
-				props.mutation[props.namekey] = modelValue.value
+			if (modelValueCopy.value != modelValue.value) {
+				emit('update', {
+					field: props.name,
+					value: modelValue.value,
+				})
 			}
 			cancelEvent()
 			setTimeout(() => blur.value = true, 800)
@@ -104,7 +104,6 @@ export default {
 			modelValue,
 			press,
 
-			isDark,
 			dRef,
 		}
 	},
