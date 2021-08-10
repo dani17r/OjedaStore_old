@@ -8,6 +8,7 @@ export default {
     /** get user - data----*** **/
     const userStore = useUserStore();
     userStore.getUser();
+    
     const user = computed(() => userStore.user);
 
     return {
@@ -23,7 +24,7 @@ export default {
     <q-toolbar>
       <q-btn round to="/user/profile">
         <q-avatar size="60px">
-          <img src="images/users/profiles/1.jpg" />
+          <img :src="user.image" />
         </q-avatar>
       </q-btn>
 

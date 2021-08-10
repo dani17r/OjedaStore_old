@@ -1,14 +1,33 @@
 <script>
 import 'babel-polyfill';
 import { ref, computed, reactive } from 'vue'
-import DImageUpload from '@components/images/DImageUpload.vue'
 import MyUpload from 'vue-image-crop-upload';
-import { api } from '@boot/axios'
+import { useUserStore } from '@store/user/userStore.js'
 
+
+const url = `http://localhost:3000/user/profile/avatar/upload`
+const leng = {
+	hint: 'click o arrastra la imagen aqui para subirla',
+	loading: 'Subiendo…',
+	noSupported: 'Este navegador no soporta los estadares javascript de esta web ',
+	success: 'Imagen subida correctamente',
+	fail: 'fallo la carga de la imagen',
+	preview: 'Previsualización',
+	btn: {
+		off: 'Cancelar',
+		close: 'Cerrar',
+		back: 'Borrar',
+		save: 'Guardar'
+	},
+	error: {
+		onlyImg: 'Solo una imagen',
+		outOfSize: 'la imagen a exedido el limite de tamaño: ',
+		lowestPx: 'El tamaño de la imagen es demasiado bajo. Se espera al menos:'
+	}
+}
 export default {
 	name: 'DImgProfile',
 	components:{
-		DImageUpload,
 		MyUpload
 	},
 	props:{
@@ -21,28 +40,12 @@ export default {
 		},
 	},
 	setup() {
-		const url = `http://localhost:3000/user/profile/avatar/upload`
-		const leng = {
-		    hint: 'click o arrastra la imagen aqui para subirla',
-		    loading: 'Subiendo…',
-		    noSupported: 'Este navegador no soporta los estadares javascript de esta web ',
-		    success: 'Imagen subida correctamente',
-		    fail: 'fallo la carga de la imagen',
-		    preview: 'Previsualización',
-		    btn: {
-		    	off: 'Cancelar',
-		    	close: 'Cerrar',
-		    	back: 'Borrar',
-		    	save: 'Guardar'
-		    },
-		    error: {
-		    	onlyImg: 'Solo una imagen',
-		    	outOfSize: 'la imagen a exedido el limite de tamaño: ',
-		    	lowestPx: 'El tamaño de la imagen es demasiado bajo. Se espera al menos:'
-		    }
-		}
-		const show = ref(false)
+		
+		/** userStore --------------- **/
+		const userStore = useUserStore()
+		const user = computed(() => userStore.user)
 
+		const show = ref(false)
 		const image = ref('')
 
 		const toggleShow = () => show.value = !show.value;
@@ -50,30 +53,18 @@ export default {
 		const cropSuccess = async (imgData) => {
 			console.log('-------- crop success --------');
 			image.value = imgData;
-
-			// let newImage = new FormData();
-            // // newImage.append("avatar", imgData)
-			// newImage.append('avatar', {
-			// 	uri : imgData.uri,
-			// 	type: imgData.type,
-			// 	name: imgData.fileName
-			// });
-			//
-			// await api.post('/uploads', newImage, {
-		    //     headers: {
-		    //       'Content-Type': 'multipart/form-data'
-		    //     }
-		    // })
 		}
 
 		const cropUploadSuccess = (jsonData) => {
-			console.log('-------- upload success --------');
-			console.log(jsonData);
+			const name = jsonData.imageName
+			const newImage = `http://localhost:3000/user/profile/avatar/${name}`
+			image.value = newImage
+			user.value.image = newImage
 		}
 
 		const cropUploadFail = (status) => {
 			console.log('-------- upload fail --------');
-			console.log(status);
+			//console.log(status);
 		}
 
 		return {

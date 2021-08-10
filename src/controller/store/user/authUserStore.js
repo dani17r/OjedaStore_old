@@ -89,7 +89,6 @@ export const useAuthUserStore = defineStore({
 
 			$q.loading.show()
 			const response = await api.post('user/login', copyCredentials)
-
 			try {
 				const loginResp = response?.data
 

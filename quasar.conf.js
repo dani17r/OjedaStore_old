@@ -40,6 +40,7 @@ module.exports = configure(function(ctx) {
 					.set('@src', path.resolve(__dirname, './src'))
 
 					.set('@boot', path.resolve(__dirname, './src/boot'))
+					.set('@composables', path.resolve(__dirname, './src/composables'))
 
 					.set('@config', path.resolve(__dirname, './src/config'))
 					.set('@directs', path.resolve(__dirname, './src/config/directs'))
