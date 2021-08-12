@@ -16,10 +16,10 @@ module.exports = configure(function(ctx) {
 			'pinia',
 			'guards',
 		],
-		css: [
-			'~/src/assets/scss/app.scss',
-			// 'app.sass', // referring to /src/css/app.sass
-		],
+		// css: [
+		// 	'~src/assets/scss/colors.scss'
+		// 	'~src/assets/scss/app.scss',
+		// ],
 		extras: [
 			'roboto-font',
 			'material-icons',
@@ -40,7 +40,7 @@ module.exports = configure(function(ctx) {
 					.set('@src', path.resolve(__dirname, './src'))
 
 					.set('@boot', path.resolve(__dirname, './src/boot'))
-					.set('@composables', path.resolve(__dirname, './src/composables'))
+					.set('@modules', path.resolve(__dirname, './src/modules'))
 
 					.set('@config', path.resolve(__dirname, './src/config'))
 					.set('@directs', path.resolve(__dirname, './src/config/directs'))
@@ -56,7 +56,7 @@ module.exports = configure(function(ctx) {
 					.set('@layouts', path.resolve(__dirname, './src/view/layouts'))
 					.set('@pages', path.resolve(__dirname, './src/view/pages'))
 
-					.set('@assets', path.resolve(__dirname, './src/assets'))
+					// .set('@assets', path.resolve(__dirname, './src/assets'))
 
 					.set('@services', path.resolve(__dirname, './src/services')) //------
 					.set('@falses', path.resolve(__dirname, './src/services/falses'))
@@ -75,13 +75,13 @@ module.exports = configure(function(ctx) {
 			open: false
 		},
 		framework: {
-			config: {
-				brand: {
-					primary: '#756dba',
-					primary_dark: '#4c486e',
-					dark: '#3b3b3b',
-				}
-			},
+			// config: {
+			// 	brand: {
+			// 		primary: '#756dba',
+			// 		primary_dark: '#4c486e',
+			// 		dark: '#3b3b3b',
+			// 	}
+			// },
 			// iconSet: 'material-icons'
 			// lang: 'en-US'
 			// components: [],
@@ -91,6 +91,7 @@ module.exports = configure(function(ctx) {
 				'Cookies',
 				'Loading',
 				'LoadingBar',
+				'Dialog'
 			]
 		},
 

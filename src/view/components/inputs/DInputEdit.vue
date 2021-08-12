@@ -69,7 +69,7 @@ export default {
 					emit('update', {
 						field: props.name,
 						value: memory.value,
-						key: props.index || `1-${props.name}`,
+						key: props.index,
 					})
 				}
 			}

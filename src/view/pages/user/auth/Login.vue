@@ -24,7 +24,7 @@ export default {
 		const onReset = () => clearObject(form)
 		const form = reactive({
 			email: {
-				value: 'dannymetal17@hotmail.com',
+				value: 'marioperez@perez.com',
 				error: false,
 				msgError: '',
 			},
@@ -57,14 +57,14 @@ export default {
 
 			<q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
 
-				<q-input 
-					clearable 
-					v-model="form.email.value" 
-					filled type="email" 
-					placeholder="Email o nombre de usuario" 
-					class="color-border-input" 
-					:error="form.email.error" 
-					:error-message="form.email.msgError" 
+				<q-input
+					clearable
+					v-model="form.email.value"
+					filled type="email"
+					placeholder="Email o nombre de usuario"
+					class="color-border-input"
+					:error="form.email.error"
+					:error-message="form.email.msgError"
 				/>
 
 				<q-input v-model="form.password.value" filled :type="!form.isPwd ? 'password' : 'text'" placeholder="Tu contraseña" class="color-border-input" clearable :error="form.password.error" :error-message="form.password.msgError">
@@ -76,8 +76,8 @@ export default {
 				<q-toggle v-model="form.extendSession" label="Quiero extender mi session por mas tiempo" class="toggle-terms-accept" />
 
 				<div class="row">
-					<q-btn label="Aceptar" type="submit" color="primary" dense class="col-8" />
-					<q-btn label="Limpiar" type="reset" color="primary" flat class="col-4" dense />
+					<q-btn label="Aceptar" type="submit" color="one" dense class="col-8" />
+					<q-btn label="Limpiar" type="reset" color="one" flat class="col-4" dense />
 				</div>
 			</q-form>
 		</div>

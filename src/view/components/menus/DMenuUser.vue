@@ -22,28 +22,28 @@ export default {
 
 		<q-item clickable v-ripple to="/user/terms-conditions">
 			<q-item-section avatar>
-				<q-icon color="primary" name="help" />
+				<q-icon color="one" name="help" />
 			</q-item-section>
 			<q-item-section>Terminos y condiciones</q-item-section>
 		</q-item>
 
 		<q-item clickable v-ripple to="/user/configurations">
 			<q-item-section avatar>
-				<q-icon color="primary" name="settings" />
+				<q-icon color="one" name="settings" />
 			</q-item-section>
 			<q-item-section>Configuración</q-item-section>
 		</q-item>
 
 		<q-item clickable v-ripple to="/user/profile">
 			<q-item-section avatar>
-				<q-icon color="primary" name="person" />
+				<q-icon color="one" name="person" />
 			</q-item-section>
 			<q-item-section>Perfil</q-item-section>
 		</q-item>
 
 		<q-item clickable v-ripple @click="onLogout">
 			<q-item-section avatar>
-				<q-icon color="primary" name="logout" />
+				<q-icon color="one" name="logout" />
 			</q-item-section>
 			<q-item-section>Salir</q-item-section>
 		</q-item>

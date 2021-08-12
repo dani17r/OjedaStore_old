@@ -94,14 +94,14 @@ export default {
             <q-btn
               label="Aceptar"
               type="submit"
-              color="primary"
+              color="one"
               dense
               class="col-8"
             />
             <q-btn
               label="Limpiar"
               type="reset"
-              color="primary"
+              color="one"
               flat
               class="col-4"
               dense

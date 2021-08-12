@@ -40,7 +40,7 @@ export default {
 		},
 	},
 	setup() {
-		
+
 		/** userStore --------------- **/
 		const userStore = useUserStore()
 		const user = computed(() => userStore.user)
@@ -62,17 +62,16 @@ export default {
 			user.value.image = newImage
 		}
 
-		const cropUploadFail = (status) => {
+		/*const cropUploadFail = (status) => {
 			console.log('-------- upload fail --------');
-			//console.log(status);
-		}
+		}*/
 
 		return {
 			show,
 			toggleShow,
 			cropSuccess,
 			cropUploadSuccess,
-			cropUploadFail,
+			//cropUploadFail,
 			image,
 			leng,
 			url,
@@ -82,10 +81,10 @@ export default {
 </script>
 
 <template>
+	<!-- @crop-upload-fail="cropUploadFail" -->
 	<MyUpload
 		@crop-success="cropSuccess"
 		@crop-upload-success="cropUploadSuccess"
-		@crop-upload-fail="cropUploadFail"
 		:width="300"
 		:height="300"
 		:noSquare="true"

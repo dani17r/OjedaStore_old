@@ -51,7 +51,7 @@ export default {
 			Rutas principales
 		</q-item-label>
 
-		<q-tabs inline-label vertical style="height:250;" active-color="primary">
+		<q-tabs inline-label vertical style="height:250;" active-color="one">
 			<template v-for="(link, index) in guestFreeLinks" :key="index">
 				<DItemTabLink v-bind="link" />
 			</template>

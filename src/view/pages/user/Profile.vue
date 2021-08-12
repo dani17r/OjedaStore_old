@@ -3,9 +3,10 @@ import { ref, computed } from 'vue'
 import { useMeta } from 'quasar'
 import { userSeo } from '@seo'
 
-import { userUpdateBasic, userUpdateLocations, userUpdatePhones }
-from '@composables/pages/user/profile.cmp.js'
-import { storeGlobal } from '@composables/store.cmp.js'
+import { userUpdateBasic, userUpdateLocations, userUpdatePhones, deleteAccount }
+from '@modules/pages/user/profile.cmp.js'
+
+import { storeGlobal } from '@modules/store.cmp.js'
 
 import DInputEdit from '@components/inputs/DInputEdit.vue'
 import DInputDate from '@components/inputs/DInputDate.vue'
@@ -20,18 +21,22 @@ export default {
     DInputEdit,
     DInputDate,
   },
-  setup() {
+  setup () {
     useMeta(userSeo.profile)
 
     /** dialog --------------- **/
     const dialogPassword = ref(false)
-
+    const isEmpty = (val) => _.isEmpty(val)
+    
     return {
-      dialogPassword,
-      ...storeGlobal(),
       ...userUpdateLocations(),
       ...userUpdatePhones(),
       ...userUpdateBasic(),
+      ...deleteAccount(),
+      ...storeGlobal(),
+
+      dialogPassword,
+      isEmpty,
     }
   },
 }
@@ -73,10 +78,15 @@ export default {
 
           <DInputDate v-model="user.birthDate" name="birthDate" placeholder="Fecha de nacimiento" label="Fecha de nacimiento" @update="updateUser" :isDark="isDark" />
 
+          <q-btn color="one" icon="https" label="Cambiar contraseña" class="q-mb-md btn-left-full" @click="dialogPassword = true" />
+
+          <q-btn color="one" icon="delete" label="Eliminar cuenta" class="q-mb-md btn-left-full" @click="deleteUser($q)" />
+
         </div>
       </div>
     </q-card>
   </div>
+
   <!-- Telefonos -->
   <div class="row justify-center">
     <q-card elevation="7" class="card-profile col-12 col-sm-10 col-lg-9">
@@ -86,7 +96,7 @@ export default {
       </strong>
       <div class="flex q-mt-lg">
         <div class="col q-px-md">
-          <q-btn color="primary" icon="phone" label="Agregar nuevo telefono" class="btn-left-full q-mb-md" @click="addPhone" />
+          <q-btn color="one" icon="phone" label="Agregar telefono" class="btn-left-full q-mb-md" @click="addPhone" />
 
           <div v-for="(phone, index) in user.phones" :key="index">
             <div class="row q-my-xs">
@@ -98,9 +108,11 @@ export default {
                 <q-btn flat fab round icon="delete" color="red-4" v-if="index!=0" @click="deletePhone(index)" />
               </div>
             </div>
-            <q-separator v-if="user.phones.length != index+1" color="primary" class="q-mb-md" />
+            <q-separator v-if="user.phones.length != index+1" color="one" class="q-mb-md" />
           </div>
-
+          <p v-if="isEmpty(user.phones)" :class="isDark ? 'text-red-4':'text-red-6'">
+              Porfavor agrega un numero.
+          </p>
         </div>
       </div>
     </q-card>
@@ -115,7 +127,7 @@ export default {
       </strong>
       <div class="flex q-mt-lg">
         <div class="col q-px-md">
-          <q-btn color="primary" icon="add_location" label="Agregar dirección" class="btn-left-full q-mb-md" @click="addLocation" />
+          <q-btn color="one" icon="add_location" label="Agregar dirección" class="btn-left-full q-mb-md" @click="addLocation" />
 
           <div v-for="(location, index) in user.locations" :key="index">
             <div class="row q-my-xs">
@@ -129,46 +141,17 @@ export default {
                 <q-btn flat fab round icon="delete" color="red-4" v-if="index!=0" @click="deleteLocation(index)" />
               </div>
             </div>
-            <q-separator v-if="user.locations.length != index+1" color="primary" class="q-mb-md" />
+            <q-separator v-if="user.locations.length != index+1" color="one" class="q-mb-md" />
           </div>
+
+          <p v-if="isEmpty(user.locations)" :class="isDark ? 'text-red-4':'text-red-6'">
+              Porfavor agrega una ubicación.
+          </p>
         </div>
       </div>
     </q-card>
   </div>
 
-  <!-- Cambiar contraseña -->
-  <div class="row justify-center">
-    <q-card elevation="7" class="card-profile col-12 col-sm-10 col-lg-9">
-      <strong class="text-h6">
-        <q-icon name="lock_open" size="25px" style="margin-top:-5px;" />
-        Contraseña de usuario
-      </strong>
-      <div class="flex q-mt-lg">
-        <div class="col q-px-md">
-          <q-btn color="primary" icon="https" label="Cambiar contraseña" class="full-width q-mb-md btn-left-full" @click="dialogPassword = true" />
-        </div>
-      </div>
-    </q-card>
-  </div>
-
-  <!-- Eliminar o Suspender -->
-  <div class="row justify-center">
-    <q-card elevation="7" class="card-profile col-12 col-sm-10 col-lg-9">
-      <strong class="text-h6">
-        <q-icon name="pan_tool" size="25px" style="margin-top:-5px;" />
-        Acciones de la cuenta
-      </strong>
-      <div class="flex q-mt-lg">
-        <div class="col q-px-md">
-
-          <q-btn color="primary" icon="delete" label="Eliminar cuenta" class="full-width q-mb-md btn-left-full" />
-
-          <q-btn color="primary" icon="info" label="Suspender cuenta" class="full-width q-mb-md btn-left-full" />
-
-        </div>
-      </div>
-    </q-card>
-  </div>
 </div>
 <DDialogPassword v-model="dialogPassword" @closed="dialogPassword = false" />
 </template>

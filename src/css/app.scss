@@ -1,7 +1,7 @@
 // app global css in SCSS form
 
 .mode--light {
-	background-color: #f4f4f4;
+	background-color: $one-light-1;
 	.guest {
 
 	}
@@ -26,12 +26,12 @@
 }
 
 .mode--dark {
-	background-color: #3b3b3b;
+	background-color: $darking;
 	.q-menu {
-		background-color: #4f4f4f;
-		color: #fff;
+		background-color: $darking-1;
+		color: $one-light;
 		.q-item__label{
-			color: #fff;
+			color: $one-light-1;
 		}
 	}
 	.guest {
@@ -44,11 +44,4 @@
 	.admin {
 
 	}
-}
-
-.bg-dark {
-    background-color: #3b3b3b;
-}
-.bg-light {
-    background-color: #ffffff;
 }

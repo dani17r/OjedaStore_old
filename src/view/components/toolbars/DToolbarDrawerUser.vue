@@ -8,7 +8,7 @@ export default {
     /** get user - data----*** **/
     const userStore = useUserStore();
     userStore.getUser();
-    
+
     const user = computed(() => userStore.user);
 
     return {

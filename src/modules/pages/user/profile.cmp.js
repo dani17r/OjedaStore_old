@@ -1,14 +1,12 @@
 import { ref, computed } from 'vue'
-import { storeGlobal } from '@composables/store.cmp.js'
+import { storeGlobal } from '@modules/store.cmp.js'
 
 /** userStore --------------- **/
-const { user } = storeGlobal()
+const { userStore, user } = storeGlobal()
 
 /** UserBasic --------------- **/
 export const userUpdateBasic = () => {
-
   const updateUser = ({field, value}) => {
-    // console.log('funciona', field, value);
     userStore.$patch(store => {
       store.user[field] = value
       userStore.updateUser({[field]: value})
@@ -19,6 +17,26 @@ export const userUpdateBasic = () => {
     updateUser
   }
 }
+
+export const deleteAccount = () => {
+  const deleteUser = ($q) => {
+    $q.dialog({
+      title: 'Eliminar mi cuenta de usuario',
+      message: 'Esta seguro que quiere eliminarla?. Puede arrepentirse.',
+      cancel: 'No',
+      ok: 'Si'
+    }).onOk(() => {
+      $q.loading.show()
+      userStore.deleteUser()
+      setTimeout(() => location.reload(), 700)
+    })
+  }
+
+  return {
+    deleteUser
+  }
+}
+
 
 /** locations --------------- **/
 export const userUpdateLocations = () => {
@@ -103,8 +121,8 @@ export const userUpdatePhones = () => {
     const addPhone = () => {
       addStatusPhone.value = true
       editPhone.value = true
-      userStore.$patch(state => {
-        state.user.phones.push('')
+      userStore.$patch(({user}) => {
+        user.phones.push('')
       })
     }
 

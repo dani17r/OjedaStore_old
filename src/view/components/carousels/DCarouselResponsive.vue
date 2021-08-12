@@ -103,7 +103,7 @@ export default {
 
             <div style="padding: 2px;">
               <q-btn
-                color="primary"
+                color="one"
                 class="full-width"
                 no-caps
                 label="Ver"

@@ -28,8 +28,8 @@ export default {
 </script>
 
 <template>
-  <q-header elevated>
-    <q-toolbar class="primary">
+  <q-header elevated class="header-custom-main">
+    <q-toolbar class="bg-one">
       <q-btn
         flat
         dense
@@ -72,3 +72,12 @@ export default {
     </q-toolbar>
   </q-header>
 </template>
+
+
+<style lang="scss">
+.header-custom-main{
+  .q-toolbar {
+    min-height: 47px;
+  }
+}
+</style>

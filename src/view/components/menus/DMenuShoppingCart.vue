@@ -10,7 +10,7 @@ export default {
 	<q-menu fit anchor="bottom right" self="top right" auto-close style="max-width:420px">
 		<q-item clickable to="/user/shopping-cart">
 			<q-item-section avatar style="min-width:40px;">
-				<!-- <q-icon color="primary" name="message" /> -->
+				<!-- <q-icon color="one" name="message" /> -->
 				<q-avatar size="60px">
 					<img src="images/products/1.jpg" />
 				</q-avatar>

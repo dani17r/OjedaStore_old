@@ -1,15 +1,13 @@
 <script>
-import { ref, reactive, computed } from 'vue'
-import { useCentralStore } from '@store/centralStore.js'
+import { ref, onMounted, computed } from 'vue'
 import { clone } from 'lodash'
-
 
 export default {
 	name: 'page-profile-user',
 	props: {
 		modelValue: {
 			type: String,
-			default: '1980/01/01',
+			default: '1860/01/01',
 		},
 		name: {
 			type: String,
@@ -21,12 +19,17 @@ export default {
 		},
 	},
 	setup(props, { emit }) {
-
 		const modelValueCopy = computed(()=> props.modelValue)
+
 		const modelValueMut = ref(props.modelValue)
+
 		const modelValue = computed({
 			get: () => modelValueMut.value,
 			set: val => modelValueMut.value = val
+		})
+
+		const dateEmpty = computed(() => {
+			return props.modelValue == '1860/01/01'
 		})
 
 		const popupStatus = ref(false)
@@ -91,6 +94,7 @@ export default {
 		return {
 			showDatePicker,
 			hideDatePicker,
+			dateEmpty,
 
 			cancelBirthDate,
 			saveBirthDate,
@@ -111,7 +115,7 @@ export default {
 </script>
 
 <template>
-<q-input :borderless="!inputActive" :dark="isDark" :class="classProperty" @click.double="showDatePicker" :ref="(el)=> dRef=el" v-model="modelValue" v-bind="$attrs" :disable="inputDisable">
+<q-input :borderless="!inputActive" :dark="isDark" :class="classProperty" @click.double="showDatePicker" :ref="(el)=> dRef=el" v-model="modelValue" v-bind="$attrs" :disable="inputDisable" :error="dateEmpty">
 	<template v-slot:after>
 		<q-icon name="event" class="cursor-pointer" size="20px" @click="showDatePicker" />
 	</template>
@@ -121,7 +125,7 @@ export default {
 		<q-date v-model="modelValue" :dark="isDark" @keydown="press">
 			<div class="row items-center justify-center">
 
-				<q-btn v-close-popup label="Guardar" color="primary" flat @click="saveBirthDate" />
+				<q-btn v-close-popup label="Guardar" color="one" flat @click="saveBirthDate" />
 				<q-btn v-close-popup label="Cancelar" color="negative" flat @click="cancelBirthDate" />
 			</div>
 		</q-date>

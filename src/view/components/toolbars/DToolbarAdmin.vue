@@ -27,7 +27,7 @@ export default {
 
 <template>
   <q-header elevated>
-    <q-toolbar class="primary">
+    <q-toolbar class="bg-one">
       <q-toolbar-title> OjedaStore-Admin </q-toolbar-title>
 
       <q-tabs inline-label>

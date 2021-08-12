@@ -30,8 +30,8 @@ export default {
 <template>
 <q-layout view="lHh Lpr lFf" class="guest">
 	<q-header elevated>
-		<q-toolbar class="bg-primary">
-			<q-btn round fab-mini class="bg-white text-primary" icon="reply" to="/" />
+		<q-toolbar class="bg-one">
+			<q-btn round fab-mini class="bg-white text-one" icon="reply" to="/" />
 			<q-toolbar-title>
 				OjedaStore
 			</q-toolbar-title>

@@ -5,7 +5,7 @@ import { useCentralStore } from '@store/centralStore.js'
 const modeDark = ({ store, type }) => {
 	let isDark$ = store.isDark$(type)
 	let colorBg = isDark$ ? 'bg-dark' : 'bg-light'
-	let color = isDark$ ? 'white' : 'primary'
+	let color = isDark$ ? 'white' : 'one'
 	return { colorBg, color }
 }
 

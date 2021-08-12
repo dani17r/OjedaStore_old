@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-<div class="fullscreen bg-primary text-white text-center flex flex-center">
+<div class="fullscreen bg-one text-white text-center flex flex-center">
 	<div class="col-12">
 		<div style="font-size: 12vh">Error 404</div>
 
@@ -13,7 +13,7 @@ export default {
 			La ruta que estas buscando, no existe.
 		</div>
 
-		<q-btn class="q-mt-xl" color="white" text-color="primary" unelevated to="/" label="Ir al inicio" no-caps />
+		<q-btn class="q-mt-xl" color="white" text-color="one" unelevated to="/" label="Ir al inicio" no-caps />
 	</div>
 </div>
 </template>

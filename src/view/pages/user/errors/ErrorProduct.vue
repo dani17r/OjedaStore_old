@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-<div class="fullscreen bg-primary text-white text-center flex flex-center">
+<div class="fullscreen bg-one text-white text-center flex flex-center">
 	<div class="col-12">
 		<div style="font-size: 12vw" class="col">Error 404</div>
 
@@ -16,7 +16,7 @@ export default {
 			</div>
 		</div>
 
-		<q-btn class="col q-mt-xl" color="white" text-color="primary" unelevated to="/stores/products" label="Ir al productos" no-caps />
+		<q-btn class="col q-mt-xl" color="white" text-color="one" unelevated to="/stores/products" label="Ir al productos" no-caps />
 	</div>
 </div>
 </template>

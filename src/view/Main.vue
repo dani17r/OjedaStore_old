@@ -2,7 +2,7 @@
 export default {
 	name: 'main-app',
     setup(){
-        
+
     },
 }
 </script>
@@ -10,7 +10,7 @@ export default {
 <template>
 <router-view v-slot="{ Component }">
 	<div id="transition">
-		<q-circular-progress indeterminate size="50px" class="text-primary progress" />
+		<q-circular-progress indeterminate size="50px" class="text-one progress" />
 	</div>
 	<component :is="Component" />
 </router-view>

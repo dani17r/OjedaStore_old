@@ -110,12 +110,12 @@ export default {
 
 <template>
 <q-dialog v-model="modelValue" persistent>
-	<q-card style="min-width: 450px">
+	<q-card class="dialog-password">
 		<q-card-section>
-			<div class="text-h6 text-primary">Cambio de contraseña</div>
+			<div class="text-h6 text-one">Cambio de contraseña</div>
 		</q-card-section>
 
-		<q-stepper v-model="step" vertical color="primary" animated class="no-padding">
+		<q-stepper v-model="step" vertical color="one" animated class="no-padding">
 			<q-step :name="1" title="Contraseña actual" icon="lock_open" :done="step > 1" caption="Clave">
 
 				<q-input v-model="password" filled autofocus :type="isPwd ? 'password' : 'text'" label="Ingresa tu contraseña actual para continuar" :rules="rulesPass" debounce="500" :clearable="true" :error="errorPass" :error-message="msgErrorPass" @update:model-value="changeErrorPass" @clear="changeErrorPass" @keyup.enter="changeNextPass">
@@ -141,7 +141,7 @@ export default {
 
 		</q-stepper>
 
-		<q-card-actions align="right" class="text-primary">
+		<q-card-actions align="right" class="text-one">
 			<q-btn flat label="Cerrar" @click="$emit('closed')" color="red-4" />
 			<q-btn flat :label="step == 1 ? 'Continuar': 'Aceptar'" @click="step == 1 ? changeNextPass() : changePassword()" />
 		</q-card-actions>
@@ -149,5 +149,14 @@ export default {
 </q-dialog>
 </template>
 
-<style lang="css">
+<style lang="scss">
+	.mode--dark {
+			.dialog-password {
+				background-color: #3a3a3a;
+				color: white;
+			}
+	}
+	.dialog-password{
+		min-width: 450px
+	}
 </style>
