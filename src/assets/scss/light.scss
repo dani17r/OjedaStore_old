@@ -1,0 +1,18 @@
+.mode--light {
+	background-color: $one-light-1;
+
+	.h1-layout {
+		display: block;
+		width: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 10000;
+		font-size: 30px;
+		text-align: center;
+	}
+}
+
+.bg-light {
+    background-color: $one-light-1;
+}

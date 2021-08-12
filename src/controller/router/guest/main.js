@@ -1,4 +1,4 @@
-import { startUser } from '@middlewares/authUser.js'
+import { startClient } from '@middlewares/authClient.js'
 
 export default [{
 		path: '/',
@@ -6,13 +6,13 @@ export default [{
 		children: [{
 			path: '',
 			name:'home',
-			component: async () => await import('@pages/Home.vue')
+			component: async () => await import('@pages/Index.vue')
 		}],
-		beforeEnter: [startUser],
+		beforeEnter: [startClient],
 	},
 	{
 		path: '/:catchAll(.*)*',
 		name:'user-error',
-		component: async () => await import('@pages/user/errors/404.vue')
+		component: async () => await import('@pages/errors/Error404.vue')
 	}
 ]

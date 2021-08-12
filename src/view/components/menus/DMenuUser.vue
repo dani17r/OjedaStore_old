@@ -1,14 +1,14 @@
 <script>
 import { useQuasar } from 'quasar'
-import { useAuthUserStore } from '@store/user/authUserStore.js'
+import { useauthClientStore } from '@store/client/authClientStore.js'
 
 export default {
 	name: 'DMenuUser',
 	setup() {
 		const $q = useQuasar()
-		const authUserStore = useAuthUserStore()
+		const authclientStore = useauthClientStore()
 
-		const onLogout = () => authUserStore.logout({ $q })
+		const onLogout = () => authclientStore.logout({ $q })
 		return {
 			onLogout
 		}

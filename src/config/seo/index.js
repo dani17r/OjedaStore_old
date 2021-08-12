@@ -59,7 +59,7 @@ export const userSeo = {
 	},
 }
 export const guestSeo = {
-	home: {
+	index: {
 		title: 'Inicio OjedaStore',
 		titleTemplate: title => `${title} - ${seoDescription}`,
 		meta: {

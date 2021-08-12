@@ -33,6 +33,8 @@ export default {
 </template>
 
 <style lang="scss">
+@import "@scss/app.scss";
+
 .mode--dark {
 		.dialog-dark-mode {
 			background-color: $one-light-2;

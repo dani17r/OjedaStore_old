@@ -7,7 +7,7 @@ export default {
 	setup() {
 		/** Modo dark */
 		const centralStore = useCentralStore()
-		const isDark = computed(()=> centralStore.isDark$('guest'))
+		const isDark = computed(()=> centralStore.isDark$)
 
 		/** Opcion de notificacion leida*/
 		const seeding = ref(true)

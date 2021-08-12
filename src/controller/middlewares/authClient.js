@@ -1,12 +1,12 @@
 import { boot } from "quasar/wrappers";
 import { api } from "@boot/axios.js";
-import { useAuthAdminStore } from "@store/admin/authAdminStore.js";
+import { useauthClientStore } from "@store/client/authClientStore.js";
 import { LoadingBar } from "quasar";
 
-const getSessionServer = async () => (await api.get("admin/session")).data;
+const getSessionServer = async () => (await api.get("user/session")).data;
 
 const isSessionActive = async () => {
-  const store = await useAuthAdminStore();
+  const store = await useauthClientStore();
   const sesionServer = await getSessionServer();
   LoadingBar.stop();
 
@@ -19,7 +19,7 @@ const isSessionActive = async () => {
   return store.isSession$;
 };
 
-export const startAdmin = async (to, from) => {
+export const startClient = async (to, from) => {
   await isSessionActive();
   LoadingBar.stop();
 };
@@ -28,7 +28,7 @@ export const authenticared = async (to, from, next) => {
   const isSession = await isSessionActive();
   LoadingBar.stop();
 
-  if (isSession) next({ name: "dashboard-main" });
+  if (isSession) next("/");
   else next();
 };
 
@@ -37,5 +37,5 @@ export const guest = async (to, from, next) => {
   LoadingBar.stop();
 
   if (isSession) next();
-  else next({ name: 'login-admin'});
+  else next("/login");
 };

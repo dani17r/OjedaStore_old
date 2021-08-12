@@ -1,5 +1,4 @@
 import { Dark } from "@tools/helps/modeDark.js";
-import { ReverseValue } from "@tools/utils.js";
 import { defineStore } from "pinia";
 
 export const useCentralStore = defineStore({
@@ -8,23 +7,21 @@ export const useCentralStore = defineStore({
     scroll: {},
     leftDrawerOpen: false,
     dark: {
-      guest: Dark.isActive("guest"),
-      admin: Dark.isActive("admin"),
-      user: Dark.isActive("user")
+      status: Dark.isActive(),
     }
   }),
   getters: {
-    isDark$: state => type => {
-      Dark.set(type, state.dark[type]);
-      return state.dark[type];
+    isDark$: state => {
+      Dark.set(state.dark.status);
+      return state.dark.status;
     }
   },
   actions: {
-    _setDark_(type) {
-      ReverseValue(this.dark, type);
+    _setDark_() {
+      this.dark.status = !this.dark.status
     },
     _toggleLeftDrawer_() {
-      ReverseValue(this, "leftDrawerOpen");
+      this.leftDrawerOpen = !this.leftDrawerOpen
     }
   }
 });

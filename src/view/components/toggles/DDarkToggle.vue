@@ -14,7 +14,7 @@ export default {
 
 		//*----Mode dark ----
 		const toggle = {
-			get value() { return store.isDark$(type) },
+			get value() { return store.isDark$ },
 			set value(v) { store._setDark_(type) }
 		}
 		//----Mode dark ----*

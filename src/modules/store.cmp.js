@@ -1,21 +1,21 @@
 import { computed } from 'vue'
 
 import { useCentralStore } from '@store/centralStore.js'
-import { useUserStore } from '@store/user/userStore.js'
+import { useclientStore } from '@store/client/clientStore.js'
 
 export const storeGlobal = () => {
 
   /** isDark --------------- **/
   const centralStore = useCentralStore();
-  const isDark = computed(() => centralStore.isDark$('guest'))
+  const isDark = computed(() => centralStore.isDark$)
 
-  /** userStore --------------- **/
-  const userStore = useUserStore()
-  const user = computed(() => userStore.user)
+  /** clientStore --------------- **/
+  const clientStore = useclientStore()
+  const user = computed(() => clientStore.user)
 
   return {
       centralStore,
-      userStore,
+      clientStore,
       isDark,
       user,
   }

@@ -16,10 +16,9 @@ module.exports = configure(function(ctx) {
 			'pinia',
 			'guards',
 		],
-		// css: [
-		// 	'~src/assets/scss/colors.scss'
-		// 	'~src/assets/scss/app.scss',
-		// ],
+		css: [
+			'~src/assets/scss/app.scss',
+		],
 		extras: [
 			'roboto-font',
 			'material-icons',
@@ -56,7 +55,8 @@ module.exports = configure(function(ctx) {
 					.set('@layouts', path.resolve(__dirname, './src/view/layouts'))
 					.set('@pages', path.resolve(__dirname, './src/view/pages'))
 
-					// .set('@assets', path.resolve(__dirname, './src/assets'))
+					.set('@assets', path.resolve(__dirname, './src/assets'))
+					.set('@scss', path.resolve(__dirname, './src/assets/scss'))
 
 					.set('@services', path.resolve(__dirname, './src/services')) //------
 					.set('@falses', path.resolve(__dirname, './src/services/falses'))
@@ -75,13 +75,12 @@ module.exports = configure(function(ctx) {
 			open: false
 		},
 		framework: {
-			// config: {
-			// 	brand: {
-			// 		primary: '#756dba',
-			// 		primary_dark: '#4c486e',
-			// 		dark: '#3b3b3b',
-			// 	}
-			// },
+			config: {
+				brand: {
+					primary: '#756dba',
+					dark: '#3b3b3b',
+				}
+			},
 			// iconSet: 'material-icons'
 			// lang: 'en-US'
 			// components: [],

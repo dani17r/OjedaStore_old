@@ -1,7 +1,7 @@
 <script>
 import { ref, computed } from 'vue'
 import { useQuasar } from 'quasar'
-import { useAuthUserStore } from '@store/user/authUserStore.js'
+import { useauthClientStore } from '@store/client/authClientStore.js'
 
 import DDarkToggle from '@components/toggles/DDarkToggle.vue'
 import DScrollMain from '@components/scroll/DScrollMain.vue'
@@ -14,7 +14,7 @@ export default {
 	},
 	setup() {
 		const $q = useQuasar()
-		const store = useAuthUserStore()
+		const store = useauthClientStore()
 
 		const isSession = computed(() => store.isSession$)
 		const onLogout = () => store.logout({ $q })

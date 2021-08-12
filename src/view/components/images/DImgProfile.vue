@@ -2,7 +2,7 @@
 import 'babel-polyfill';
 import { ref, computed, reactive } from 'vue'
 import MyUpload from 'vue-image-crop-upload';
-import { useUserStore } from '@store/user/userStore.js'
+import { useclientStore } from '@store/client/clientStore.js'
 
 
 const url = `http://localhost:3000/user/profile/avatar/upload`
@@ -41,9 +41,9 @@ export default {
 	},
 	setup() {
 
-		/** userStore --------------- **/
-		const userStore = useUserStore()
-		const user = computed(() => userStore.user)
+		/** clientStore --------------- **/
+		const clientStore = useclientStore()
+		const user = computed(() => clientStore.user)
 
 		const show = ref(false)
 		const image = ref('')

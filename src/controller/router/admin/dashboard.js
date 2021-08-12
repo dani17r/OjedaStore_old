@@ -8,7 +8,7 @@ export default [
       {
         path: "",
         name: "dashboard-main",
-        component: () => import("@pages/admin/Home.vue"),
+        component: () => import("@pages/admin/Index.vue"),
         beforeEnter: [guest]
       }
     ]

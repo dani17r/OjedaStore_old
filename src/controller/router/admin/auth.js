@@ -13,14 +13,14 @@ export default [
 			{
 				path: 'login',
 				name: 'login-admin',
-				component: () => import('@pages/admin/auth/Login.vue'),
+				component: () => import('@pages/auth/admin/Login.vue'),
 				beforeEnter: [authenticared],
 			},
 			{
 				path: 'register/:hash',
 				name: 'register-admin',
 				props: { default:true },
-				component: () => import('@pages/admin/auth/Register.vue'),
+				component: () => import('@pages/auth/admin/Register.vue'),
 				beforeEnter: [authenticared],
 			},
 		]
@@ -31,7 +31,7 @@ export default [
         children: [{
             path: '',
             name: 'admin-error',
-            component: () => import('@pages/admin/errors/404.vue'),
+            component: () => import('@pages/errors/admin/Error404.vue'),
         }]
     }
 

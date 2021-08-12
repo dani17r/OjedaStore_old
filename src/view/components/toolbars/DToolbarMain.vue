@@ -5,7 +5,7 @@ import DDarkToggle from "@components/toggles/DDarkToggle.vue";
 import DMenuUser from "@components/menus/DMenuUser.vue";
 
 import { ref, computed } from "vue";
-import { useAuthUserStore } from "@store/user/authUserStore.js";
+import { useauthClientStore } from "@store/client/authClientStore.js";
 
 export default {
   name: "DToolbarMain",
@@ -17,8 +17,8 @@ export default {
   },
   setup() {
     //----Session user ----*
-    const authUserStore = useAuthUserStore();
-    const isSession = computed(() => authUserStore.isSession$);
+    const authclientStore = useauthClientStore();
+    const isSession = computed(() => authclientStore.isSession$);
 
     return {
       isSession

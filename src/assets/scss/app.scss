@@ -1,0 +1,19 @@
+@import 'colors.scss';
+@import 'variables.scss';
+@import 'light.scss';
+@import 'dark.scss';
+
+@mixin generico($map, $atributo) {
+  @each $nombre, $valor in $map {
+     &-#{$nombre} {
+      #{$atributo}: $valor;
+     }
+  }
+}
+
+.text {
+	@include generico($colores, 'color');
+}
+.bg {
+	@include generico($colores, 'background-color');
+}

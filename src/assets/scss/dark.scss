@@ -1,0 +1,14 @@
+.bg-dark {
+  background-color: $darking;
+}
+
+.mode--dark {
+	background-color: $darking;
+	.q-menu {
+		background-color: $darking-1;
+		color: $one-light;
+		.q-item__label{
+			color: $one-light-1;
+		}
+	}
+}
