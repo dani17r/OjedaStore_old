@@ -1,7 +1,5 @@
 <script>
 import { ref, reactive, computed, watch } from 'vue'
-import { useCentralStore } from '@store/centralStore.js'
-import { useclientStore } from "@store/client/clientStore.js";
 
 export default {
 	name: 'page-profile-user',

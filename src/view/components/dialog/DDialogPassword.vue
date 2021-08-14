@@ -1,6 +1,6 @@
 <script>
-import { useauthClientStore } from '@store/client/authClientStore.js'
-import { useclientStore } from '@store/client/clientStore.js'
+import { authClientStore } from '@store/client/authClientStore.js'
+import { clientStore } from '@store/client/clientStore.js'
 import { useQuasar } from 'quasar'
 
 import { ref, watch, computed } from 'vue'
@@ -19,9 +19,7 @@ export default {
 		const $q = useQuasar()
 
 		/** clientStore --------------- **/
-		const authclientStore = useauthClientStore()
-		const clientStore = useclientStore()
-		const user = computed(() => clientStore.user)
+		const user = computed(() => clientStore.state.user)
 
 		/** stepper --------------- **/
 		const step = ref(1)
@@ -57,7 +55,7 @@ export default {
 		}
 		const changeNextPass = async () => {
 			if (!isEmpty(password.value)) {
-				const result = await authclientStore.getPassword(password.value)
+				const result = await authClientStore.getPassword(password.value)
 				if (result) {
 					step.value = 2
 				}
@@ -69,7 +67,7 @@ export default {
 		}
 		const changePassword = () => {
 			if (newPassword.value == confirmPassword.value) {
-				const result = authclientStore.changeUserPassword(newPassword.value, $q)
+				const result = authClientStore.changeUserPassword(newPassword.value, $q)
 				if (result) {
 					emit('closed')
 					step.value = 1

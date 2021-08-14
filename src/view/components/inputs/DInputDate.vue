@@ -7,7 +7,7 @@ export default {
 	props: {
 		modelValue: {
 			type: String,
-			default: '1860/01/01',
+			default: '1900/01/01',
 		},
 		name: {
 			type: String,
@@ -24,7 +24,7 @@ export default {
 		const modelValueMut = ref(props.modelValue)
 
 		const modelValue = computed({
-			get: () => modelValueMut.value,
+			get: () => modelValueCopy,
 			set: val => modelValueMut.value = val
 		})
 

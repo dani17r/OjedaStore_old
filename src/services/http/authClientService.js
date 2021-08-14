@@ -1,10 +1,10 @@
 import { SessionStorage } from 'quasar'
 
 export const addCredentials = (state, data) => {
-	SessionStorage.set('uidClient', data)
-	SessionStorage.set('status', true)
 	state.session.status = true
 	state.session.uidClient = data
+	SessionStorage.set('uidClient', data)
+	SessionStorage.set('status', true)
 }
 
 export const deleteCredentials = (state) => {

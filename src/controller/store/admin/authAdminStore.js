@@ -9,7 +9,7 @@ export const useAuthAdminStore = defineStore({
   id: "authAdminStore",
   state: () => ({
     session: {
-      status: SessionStorage.getItem("status") || false,
+      status: SessionStorage.getItem("statusAd") || false,
       uidAdmin: SessionStorage.getItem("uidAdmin") || null
     }
   }),

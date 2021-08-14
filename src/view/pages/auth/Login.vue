@@ -1,5 +1,5 @@
 <script>
-import { useauthClientStore } from '@store/client/authClientStore.js'
+import { authClientStore } from '@store/client/authClientStore.js'
 import { onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router'
 import { userSeo } from '@config/seo'
 import { clearObject } from '@tools/utils.js'
@@ -15,10 +15,9 @@ export default {
 
     const $q = useQuasar()
     const router = useRouter()
-    const store = useauthClientStore()
 
     const onSubmit = async () => {
-      const isLogin = await store.login({ $q, credentials: form })
+      const isLogin = await authClientStore.login({ $q, credentials: form })
       if (isLogin) setTimeout(() => router.push('/'), 600)
     }
     const onReset = () => clearObject(form)

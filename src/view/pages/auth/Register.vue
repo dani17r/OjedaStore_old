@@ -1,5 +1,5 @@
 <script>
-import { useauthClientStore } from '@store/client/authClientStore.js'
+import { authClientStore } from '@store/client/authClientStore.js'
 import DDialogTerms from '@components/dialog/DDialogTerms'
 import { clearObject } from '@tools/utils.js'
 import { useMeta, useQuasar } from 'quasar'
@@ -18,7 +18,6 @@ export default {
     useMeta(userSeo.register)
     const router = useRouter()
     const $q = useQuasar()
-    const store = useauthClientStore()
 
     const form = reactive({
       email: {
@@ -53,7 +52,7 @@ export default {
     const dialogTerms = ref(false)
 
     const onSubmit = async () => {
-      const isRegister = await store.register({ $q, credentials: form })
+      const isRegister = await authClientStore.register({ $q, credentials: form })
       if (isRegister) setTimeout(() => router.push('/login'), 600)
     }
 

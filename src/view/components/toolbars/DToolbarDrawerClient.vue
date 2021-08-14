@@ -1,18 +1,15 @@
 <script>
 import { computed, ref } from "vue";
-import { useclientStore } from "@store/client/clientStore.js";
+import { clientStore } from "@store/client/clientStore.js";
 
 export default {
   name: "DToolbarDrawerClient",
   setup() {
     /** get user - data----*** **/
-    const clientStore = useclientStore();
-    clientStore.get();
-
-    const user = computed(() => clientStore.user);
+    clientStore.getClient();
+    const user = computed(() => clientStore.state.user);
 
     return {
-      /** data of user */
       user
     };
   }

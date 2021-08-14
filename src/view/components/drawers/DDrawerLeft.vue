@@ -8,7 +8,7 @@ import { clientFreeLinks } from '@directs/client.js'
 import { autorLinks } from '@directs/autor.js'
 import { computed, ref } from 'vue'
 
-import { useauthClientStore } from '@store/client/authClientStore.js'
+import { authClientStore } from '@store/client/authClientStore.js'
 
 export default {
   name: 'DDrawerLeft',
@@ -22,9 +22,8 @@ export default {
     const attrsSelection = { modelValue }
 
     /** authenticared user----*** **/
-    const authclientStore = useauthClientStore()
-    const isSession = computed(() => authclientStore.isSession$)
-
+    const isSession = computed(() => authClientStore.isSession$.value)
+    console.log(isSession.value);
     return {
       /** attributes selection by v-bind*/
       attrsSelection,
