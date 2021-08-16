@@ -1,13 +1,12 @@
 <script>
 import { ref, computed } from 'vue'
-import { useCentralStore } from '@store/centralStore.js'
+import { centralStore } from '@store/centralStore.js'
 
 export default {
 	name: 'd-menu-notificacions',
 	setup() {
 		/** Modo dark */
-		const centralStore = useCentralStore()
-		const isDark = computed(()=> centralStore.isDark$)
+		const isDark = computed(()=> centralStore.isDark$.value)
 
 		/** Opcion de notificacion leida*/
 		const seeding = ref(true)

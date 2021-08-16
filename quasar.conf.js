@@ -13,7 +13,6 @@ module.exports = configure(function(ctx) {
 		boot: [
 			'i18n',
 			'axios',
-			'pinia',
 			'guards',
 		],
 		css: [
@@ -98,8 +97,8 @@ module.exports = configure(function(ctx) {
 		animations: [],
 		ssr: {
 			pwa: false,
-			// manualStoreHydration: true,
-			// manualPostHydrationTrigger: true,
+			manualStoreHydration: true,
+			manualPostHydrationTrigger: true,
 			prodPort: 3000,
 			maxAge: 1000 * 60 * 60 * 24 * 30,
 			chainWebpackWebserver( /*chain, { isServer, isClient }*/ ) {},

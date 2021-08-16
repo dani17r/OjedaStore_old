@@ -1,12 +1,13 @@
 import { boot } from "quasar/wrappers";
 import { api } from "@boot/axios.js";
-import { useAuthAdminStore } from "@store/admin/authAdminStore.js";
+import { authAdminStore } from "@store/admin/authAdminStore.js";
 import { LoadingBar } from "quasar";
+import { computed } from 'vue'
 
 const getSessionServer = async () => (await api.get("admin/session")).data;
 
 const isSessionActive = async () => {
-  const store = await useAuthAdminStore();
+  const store = await authAdminStore;
   const sesionServer = await getSessionServer();
   LoadingBar.stop();
 
@@ -16,7 +17,7 @@ const isSessionActive = async () => {
     store.setSession(sesionServer);
   }
 
-  return store.isSession$;
+  return computed(()=>store.isSession$.value).value;
 };
 
 export const startAdmin = async (to, from) => {

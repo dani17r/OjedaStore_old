@@ -1,23 +1,15 @@
 <script>
-import { useCentralStore } from '@store/centralStore.js'
+import { centralStore } from '@store/centralStore.js'
 
 export default {
 	name: 'DDarkToggle',
-	props: {
-		type: {
-			type: String,
-			require: true,
-		},
-	},
-	setup({ type }) {
-		const store = useCentralStore()
+	setup() {
 
 		//*----Mode dark ----
 		const toggle = {
-			get value() { return store.isDark$ },
-			set value(v) { store._setDark_(type) }
+			get value() { return centralStore.isDark$.value },
+			set value(v) { centralStore._setDark_() }
 		}
-		//----Mode dark ----*
 
 		return {
 			toggle,

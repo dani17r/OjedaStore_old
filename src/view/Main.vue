@@ -14,7 +14,7 @@ export default {
 </template>
 
 <style lang="scss">
-.progress {
+ .progress {
     display: none;
 }
 .transition {

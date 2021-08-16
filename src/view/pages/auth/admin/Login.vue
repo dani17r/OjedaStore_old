@@ -1,5 +1,5 @@
 <script>
-import { useAuthAdminStore } from "@store/admin/authAdminStore.js";
+import { authAdminStore } from "@store/admin/authAdminStore.js";
 //import { userSeo } from '@config/seo'
 import { clearObject } from "@tools/utils.js";
 import { useMeta, useQuasar } from "quasar";
@@ -13,9 +13,8 @@ export default {
 
     const $q = useQuasar();
     const router = useRouter();
-    const authAdminStore = useAuthAdminStore();
 
-	const form = reactive({
+    const form = reactive({
       username: {
         value: "@_admin",
         error: false,
@@ -30,9 +29,10 @@ export default {
       isPwd: false
     });
 
-	const onSubmit = async () => {
+    const onSubmit = async () => {
       const isLogin = await authAdminStore.login({ $q, credentials: form });
-      if (isLogin) setTimeout(() => router.push({name: 'dashboard-main'}), 600);
+      if (isLogin)
+        setTimeout(() => router.push({ name: "dashboard-main" }), 600);
     };
     const onReset = () => clearObject(form);
 
@@ -115,21 +115,21 @@ export default {
 
 <style lang="scss">
 .mode--dark {
-    .color-border-input {
-      .q-field__control:before {
-        border-bottom: 1px solid #fff;
-      }
-      .q-field__native,
-      .q-icon {
-        color: white;
-      }
+  .color-border-input {
+    .q-field__control:before {
+      border-bottom: 1px solid #fff;
     }
-    .title-login {
+    .q-field__native,
+    .q-icon {
       color: white;
     }
-    .toggle-terms-accept {
-      color: white;
-    }
+  }
+  .title-login {
+    color: white;
+  }
+  .toggle-terms-accept {
+    color: white;
+  }
 }
 .pages-login-admin {
   .title-login {

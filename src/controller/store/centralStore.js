@@ -1,27 +1,34 @@
-import { Dark } from "@tools/helps/modeDark.js";
-import { defineStore } from "pinia";
+import {Dark} from "@tools/helps/modeDark.js";
+import {reactive, computed} from 'vue'
 
-export const useCentralStore = defineStore({
-  id: "centralStore",
-  state: () => ({
-    scroll: {},
-    leftDrawerOpen: false,
-    dark: {
-      status: Dark.isActive(),
-    }
-  }),
-  getters: {
-    isDark$: state => {
-      Dark.set(state.dark.status);
-      return state.dark.status;
-    }
+const state = reactive({
+	scroll: {},
+	leftDrawerOpen: false,
+	dark: {
+		status: Dark.isActive()
+	}
+})
+
+const actions = {
+  _setDark_() {
+    state.dark.status = !state.dark.status
   },
-  actions: {
-    _setDark_() {
-      this.dark.status = !this.dark.status
-    },
-    _toggleLeftDrawer_() {
-      this.leftDrawerOpen = !this.leftDrawerOpen
-    }
+  _toggleLeftDrawer_() {
+    state.leftDrawerOpen = !state.leftDrawerOpen
   }
-});
+}
+
+const getters = {
+	isDark$: computed(() => {
+		Dark.set(state.dark.status);
+    // console.log('state', state.dark.status);
+		return state.dark.status;
+	})
+}
+
+export const centralStore = {
+	debug: true,
+	state,
+	...getters,
+	...actions,
+}

@@ -1,7 +1,7 @@
 <script>
 import { ReverseValue } from "@tools/utils.js";
-import { useCentralStore } from "@store/centralStore.js";
-import { ref, computed } from "vue";
+import { centralStore } from "@store/centralStore.js";
+import { computed } from "vue";
 
 import DDrawerLeft from "@components/drawers/DDrawerLeft.vue";
 import DToolbarMain from "@components/toolbars/DToolbarMain.vue";
@@ -15,11 +15,10 @@ export default {
     DScrollMain
   },
   setup() {
-    const centralStore = useCentralStore();
 
     //*----Drawer left ----
     const leftDrawerOpen = computed({
-      get: () => centralStore.leftDrawerOpen,
+      get: () => centralStore.state.leftDrawerOpen,
       set: val => centralStore._toggleLeftDrawer_()
     });
 

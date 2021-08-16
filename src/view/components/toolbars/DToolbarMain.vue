@@ -4,7 +4,7 @@ import DMenuShoppingCart from "@components/menus/DMenuShoppingCart.vue";
 import DDarkToggle from "@components/toggles/DDarkToggle.vue";
 import DMenuUser from "@components/menus/DMenuUser.vue";
 
-import { ref, computed } from "vue";
+import { computed } from "vue";
 import { authClientStore } from "@store/client/authClientStore.js";
 
 export default {

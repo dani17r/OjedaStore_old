@@ -1,11 +1,12 @@
+import { centralStore } from '@store/centralStore.js'
 import { boot } from 'quasar/wrappers'
 import { LoadingBar } from 'quasar'
-import { useCentralStore } from '@store/centralStore.js'
+import { computed} from 'vue'
 
-const modeDark = (store) => {
-	let isDark$ = store.isDark$
-	let colorBg = isDark$ ? 'bg-dark' : 'bg-light'
-	let color = isDark$ ? 'white' : 'primary'
+const modeDark = () => {
+	let isDark$ = computed(()=>centralStore.isDark$.value)
+	let colorBg = isDark$.value ? 'bg-dark' : 'bg-light'
+	let color = isDark$.value ? 'white' : 'primary'
 	return { colorBg, color }
 }
 
@@ -26,8 +27,7 @@ export default boot(function({ router }) {
 
 	router.beforeEach((to, from) => {
 		guieTo = GuieToRouter(to.fullPath)
-		const centralStore = useCentralStore()
-		const { colorBg, color } = modeDark(centralStore)
+		const { colorBg, color } = modeDark()
 
 		if(guieTo) {
 			getHtmlId().add(`bg-loading`, `${colorBg}`)
@@ -42,8 +42,7 @@ export default boot(function({ router }) {
 	})
 
 	router.afterEach((to, from) => {
-		const centralStore = useCentralStore()
-		const { colorBg } = modeDark(centralStore)
+		const { colorBg } = modeDark()
 
 		if(guieTo) {
 			setTimeout(() => {

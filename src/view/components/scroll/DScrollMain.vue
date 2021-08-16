@@ -1,6 +1,6 @@
 <script>
 import { computed, ref, watch } from 'vue'
-import { useCentralStore } from '@store/centralStore.js'
+import { centralStore } from '@store/centralStore.js'
 import { onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router'
 import { isEmpty } from 'lodash'
 
@@ -8,10 +8,9 @@ export default {
 	name: 'DScrollMain',
 	props: ['currentRoute'],
 	setup(props) {
-		const centralStore = useCentralStore()
 		const refScroll = ref(null)
 		const currentRoute = computed(() => props.currentRoute)
-		const scrollRoutes = computed(() => centralStore.scroll)
+		const scrollRoutes = computed(() => centralStore.state.scroll)
 		const RoutesMemory = []
 		const countRoutePass = ref(0)
 
@@ -28,7 +27,7 @@ export default {
 			countRoutePass.value++
 
 			if (!scrollRoutes.value[RoutesMemory[0]]) {
-				centralStore.scroll[RoutesMemory[0]] = refScroll.value.getScrollPosition().top
+				centralStore.state.scroll[RoutesMemory[0]] = refScroll.value.getScrollPosition().top
 			}
 
 			const currentPosition = scrollRoutes.value[RoutesMemory[1]]

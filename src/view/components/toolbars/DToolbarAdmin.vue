@@ -6,7 +6,7 @@ import DMenuUser from "@components/menus/DMenuUser.vue";
 
 import { ref, computed } from "vue";
 import { useQuasar } from "quasar";
-import { useAuthAdminStore } from "@store/admin/authAdminStore.js";
+import { authAdminStore } from "@store/admin/authAdminStore.js";
 
 export default {
   name: "DToolbarAdmin",
@@ -15,7 +15,6 @@ export default {
   },
   setup() {
     const $q = useQuasar();
-    const authAdminStore = useAuthAdminStore();
 
     const logout = () => authAdminStore.logout({ $q });
     return {

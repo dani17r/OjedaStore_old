@@ -1,10 +1,10 @@
 <script>
 import { Carousel, Navigation, Slide } from "vue3-carousel";
-import { useCentralStore } from "@store/centralStore.js";
+import { centralStore } from "@store/centralStore.js";
 import { tiendas } from "@falses/stores.js";
-import { capitalize } from "lodash";
 import { reactive, computed } from "vue";
 import { useRouter } from "vue-router";
+import { capitalize } from "lodash";
 
 export default {
   name: "page-home",
@@ -15,8 +15,7 @@ export default {
   },
   setup() {
     const router = useRouter();
-    const centralStore = useCentralStore();
-    const leftDrawerState = computed(() => centralStore.leftDrawerOpen);
+    const leftDrawerState = computed(() => centralStore.state.leftDrawerOpen);
 
     const classMut = computed(() => {
       return [leftDrawerState.value ? null : "move-margin", "carousel-style"];

@@ -18,7 +18,8 @@
     "vue3-carousel": "^0.1.24"
   },
   "devDependencies": {
-    "@quasar/app": "^3.0.4"
+    "@quasar/app": "^3.0.4",
+    "workbox-webpack-plugin": "^6.0.0"
   },
   "browserslist": [
     "last 10 Chrome versions",
