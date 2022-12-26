@@ -1,4 +1,4 @@
-# OjedaStore
+# OjedaStore OLD
 Proyecto de desarrollo de una multi-store para ciudad ojeda.
 
 ## Install the dependencies
